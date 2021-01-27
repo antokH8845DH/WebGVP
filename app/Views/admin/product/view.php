@@ -41,14 +41,15 @@
                             </p>
                         </div>
                     <?php endif ?>
-                    <h3 class="header-title">Data Sub Category Products</h3>
-                    <a href="" class="btn btn-outline-primary btn-sm mb-3" href="#" role="button" data-toggle="modal" data-target="#modalProduct"><i class="fa fa-plus-circle"></i> Add Menu Product</a>
+                    <h3 class="header-title">LIST PRODUCTS</h3>
+                    <a href="<?= base_url('product/Product'); ?>" class="btn btn-outline-primary btn-sm mb-3" role="button">Add Product</a>
+                    <!-- <a href="" class="btn btn-outline-primary btn-sm mb-3" href="#" role="button" data-toggle="modal" data-target="#modalProduct"><i class="fa fa-plus-circle"></i> Add Menu Product</a> -->
                     <!-- <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modalPassword">Ganti Password</a> -->
                     <div class="modal fade" id="modalProduct" tabindex="-10" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalCenterTitle">ADD SUB-CATEGORY</h5>
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Add Product</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -60,8 +61,8 @@
                                             <div class="col-sm-7">
                                                 <select name="idProductCategory" class="form-control ml-1" placeholder="Accesories Name">
                                                     <option value="">Choose Category</option>
-                                                    <?php foreach ($categories as $index => $category) : ?>
-                                                        <option value="<?= $category->id; ?>"><?= $category->category; ?></option>
+                                                    <?php foreach ($subCategories as $index => $sub) : ?>
+                                                        <option value="<?= $sub->id; ?>"><?= $sub->subCategory; ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>

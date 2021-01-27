@@ -78,4 +78,17 @@ class Validation
 			'required' => '{field} Harus Diisi',
 		],
 	];
+	public $add_product = [
+		'subCategory' => [
+			'rules' => 'required|min_length[3]',
+		],
+	];
+	public $add_product_errors = [
+		'subCategory' => [
+			'required' => 'Category harus diisi',
+
+			'min_length' => '{field} Minimal 5 Karakter',
+
+		],
+	];
 }

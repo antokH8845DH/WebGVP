@@ -66,7 +66,7 @@
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span>Master Data</span></a>
                                 <ul class="collapse">
                                     <li><a href="<?= base_url('HomeAdmin/view'); ?>">Category Product</a></li>
-                                    <li><a href="##">Product</a></li>
+                                    <li><a href="<?= base_url('product/view'); ?>">Product</a></li>
                                 </ul>
                             </li>
                             <li>
