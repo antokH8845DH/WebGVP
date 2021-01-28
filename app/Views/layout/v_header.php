@@ -21,7 +21,7 @@
                                 </li>
                             </ul>
                             <div class="top_bar_login ml-auto">
-                                <div class="login_button"><a href="<?= base_url('Auth/Login'); ?>">Login</a></div>
+                                <div class="login_button"><a href="<?= site_url('Auth/Login'); ?>">Login</a></div>
                             </div>
                         </div>
                     </div>
@@ -45,8 +45,8 @@
 
                         <nav class="nav-menu d-none d-lg-block">
                             <ul>
-                                <li class="active"><a href="<?= base_url('Home'); ?>">Home</a></li>
-                                <li><a href="<?= base_url('/aboutUs'); ?>">About</a></li>
+                                <li class="active"><a href="<?= site_url('Home'); ?>">Home</a></li>
+                                <li><a href="<?= site_url('/aboutUs'); ?>">About</a></li>
                                 <li class="drop-down"><a href="#">Product</a>
                                     <ul>
                                         <!-- <li><a href="#">Drop Down 1</a></li> -->
@@ -54,23 +54,23 @@
                                             <ul>
                                                 <li class="drop-down"><a href="#">Hematology</a>
                                                     <ul>
-                                                        <li><a href="<?= base_url('/product/DH36'); ?>">Dymind DH36</a></li>
-                                                        <li><a href="<?= base_url('/product/D5CRP'); ?>">Dymind D5CRP</a></li>
+                                                        <li><a href="<?= site_url('/product/DH36'); ?>">Dymind DH36</a></li>
+                                                        <li><a href="<?= site_url('/product/D5CRP'); ?>">Dymind D5CRP</a></li>
                                                     </ul>
                                                 <li class="drop-down"><a href="#">Immunology</a>
                                                     <ul>
-                                                        <li><a href="<?= base_url('/product/A1000'); ?>">Autolumo A1000</a></li>
-                                                        <li><a href="<?= base_url('/product/A2000plus'); ?>">Autolumo A2000plus</a></li>
+                                                        <li><a href="<?= site_url('/product/A1000'); ?>">Autolumo A1000</a></li>
+                                                        <li><a href="<?= site_url('/product/A2000plus'); ?>">Autolumo A2000plus</a></li>
                                                     </ul>
                                                 </li>
                                                 <li class="drop-down"><a href="#">Chlinical Chemistry</a>
                                                     <ul>
                                                         <!-- <li><a href="#">GS200</a></li>
                                                         <li><a href="#">GS400</a></li> -->
-                                                        <li><a href="<?= base_url('/product/MS480'); ?>">MS480</a></li>
+                                                        <li><a href="<?= site_url('/product/MS480'); ?>">MS480</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="<?= base_url('/product/H900'); ?>">Electrolyte</a></li>
+                                                <li><a href="<?= site_url('/product/H900'); ?>">Electrolyte</a></li>
                                                 <li><a href="#">Protein</a></li>
                                                 <li><a href="#">Coagulation</a></li>
                                                 <li><a href="#">ESR</a></li>
@@ -106,10 +106,10 @@
                                 </li>
 
                                 <li><a href="#">Services</a></li>
-                                <li><a href="<?= base_url('News'); ?>">News</a></li>
-                                <li><a href="<?= base_url('Career'); ?>">Career</a></li>
-                                <!-- <li><a href="<?= base_url('Auth/Register'); ?>">register</a></li> -->
-                                <li><a href="<?= base_url('ContactUs'); ?>">Contact</a></li>
+                                <li><a href="<?= site_url('News'); ?>">News</a></li>
+                                <li><a href="<?= site_url('Career'); ?>">Career</a></li>
+                                <!-- <li><a href="<?= site_url('Auth/Register'); ?>">register</a></li> -->
+                                <li><a href="<?= site_url('ContactUs'); ?>">Contact</a></li>
 
                             </ul>
                         </nav>
