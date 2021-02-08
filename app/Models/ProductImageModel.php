@@ -8,7 +8,7 @@ class ProductImageModel extends Model
 {
 
     protected $table = 'productimage';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'idProductImage';
     protected $allowedFields = [
         'idProductDetail', 'info', 'img', 'created_by', 'created_date', 'update_by', 'update_date', 'active'
     ];

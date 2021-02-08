@@ -8,7 +8,7 @@ class SubCategoryProductModel extends Model
 {
 
     protected $table = 'productsubcategory';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'idProductSubCategory';
     protected $allowedFields = [
         'idProductCategory', 'subCategory', 'created_by', 'created_date', 'update_by', 'update_date', 'active'
     ];

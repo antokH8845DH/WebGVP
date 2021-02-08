@@ -34,7 +34,8 @@
 <!-- others plugins -->
 <script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/plugins.js"></script>
 <script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/scripts.js"></script>
-<?= $this->renderSection('scrip'); ?>
+<script src="<?= base_url(''); ?>/ckeditor5-build-classic/ckeditor.js" type="text/javascript"> </script>
+<?= $this->renderSection('script'); ?>
 </body>
 
 </html>

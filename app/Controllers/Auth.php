@@ -80,7 +80,9 @@ class Auth extends BaseController
                         'username' => $user->username,
                         'id' => $user->id,
                         'role' => $user->role,
-                        'isLoggedIn' => TRUE
+                        'isLoggedIn' => TRUE,
+                        'avatar' => $user->avatar,
+                        'role' => $user->role,
                     ];
 
                     $this->session->set($sessData);
@@ -88,7 +90,6 @@ class Auth extends BaseController
                     if ($role == '0') {
                         return redirect()->to(base_url('home/admin'));
                     }
-
 
                     return redirect()->to(site_url('home'));
                 }

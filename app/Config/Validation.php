@@ -91,4 +91,44 @@ class Validation
 
 		],
 	];
+	public $instrument = [
+		'idProductSubCategory' => [
+			'rules' => 'required',
+		],
+		'product_name' => [
+			'rules' => 'required|min_length[3]',
+		],
+		// 'product_tpye' => [
+		// 	'rules' => 'required|min_length[3]',
+		// ],
+		'product_brand' => [
+			'rules' => 'required|min_length[3]',
+		],
+		'product_description' => [
+			'rules' => 'required|min_length[3]',
+		],
+		'product_specification' => [
+			'rules' => 'required|min_length[3]',
+		],
+	];
+	public $instrument_errors = [
+		'idProductSubCategory' => [
+			'required' => 'Category harus diisi',
+		],
+		'product_name' => [
+			'required' => 'Nama Produk harus diisi',
+		],
+		// 'product_tpye' => [
+		// 	'required' => 'Tipe Produk harus diisi',
+		// ],
+		'product_brand' => [
+			'required' => 'Brand Produk harus diisi',
+		],
+		'product_description' => [
+			'required' => 'Deskripsi harus diisi',
+		],
+		'product_specification' => [
+			'required' => 'Spesifikasi harus diisi',
+		],
+	];
 }

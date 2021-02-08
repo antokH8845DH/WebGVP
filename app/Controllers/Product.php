@@ -50,23 +50,29 @@ class Product extends BaseController
         $categoryProductModel =  new \App\Models\CategoryProductModel();
         $categories =  $categoryProductModel->where('active', 'Y')->findAll();
         $SubCategoryProductModel = new \App\Models\SubCategoryProductModel();
-        $subCategory = $SubCategoryProductModel->join('productcategory', 'productcategory.id=idProductCategory')->where('productsubcategory.active', 'Y')
+        $subCategory = $SubCategoryProductModel->join('productcategory', 'productcategory.idProductCategory=productsubcategory.idProductCategory')->where('productsubcategory.active', 'Y')
             ->orderBy('productcategory.category', 'ASC')
             ->findAll();
 
         $array = ['productdetail.active' => 'Y', 'productimage.active' => 'Y'];
         $productDetailModel = new \App\Models\ProductDetailModel();
         $productImageModel = new \App\Models\ProductImageModel();
-        $products = $productDetailModel->join('productsubcategory', 'productsubcategory.id=idProductSubCategory')
-            ->join('productimage', 'productimage.idproductdetail=productdetail.id')
+        $products = $productDetailModel->join('productsubcategory', 'productsubcategory.idProductSubCategory=productdetail.idProductSubCategory')
+            ->join('productimage', 'productimage.idproductdetail=productdetail.idProductDetail')
             ->where($array)->findAll();
+
+        $dataproducts = $productDetailModel->select('productdetail.idProductDetail,productcategory.category,productsubcategory.subCategory,productdetail.product_brand,productdetail.product_name')
+            ->join('productsubcategory', 'productsubcategory.idProductSubCategory=productdetail.idProductSubCategory')
+            ->join('productcategory', 'productcategory.idProductCategory=productsubcategory.idProductCategory')
+            ->where('productdetail.active', 'Y')->findAll();
+        // return view('welcome_message');
         $data = [
             'subCategories' => $subCategory,
             'title' => 'Product',
             'products' => $products,
             'categories' => $categories,
+            'dataproducts' => $dataproducts,
         ];
-        // return view('welcome_message');
         return view('admin/product/view', $data);
     }
     public function Product()
@@ -74,15 +80,15 @@ class Product extends BaseController
         $categoryProductModel =  new \App\Models\CategoryProductModel();
         $categories =  $categoryProductModel->where('active', 'Y')->findAll();
         $SubCategoryProductModel = new \App\Models\SubCategoryProductModel();
-        $subCategory = $SubCategoryProductModel->join('productcategory', 'productcategory.id=idProductCategory')->where('productsubcategory.active', 'Y')
-            ->orderBy('productcategory.category', 'ASC')
+        $subCategory = $SubCategoryProductModel->join('productcategory', 'productcategory.idProductCategory=productsubcategory.idProductCategory')->where('productsubcategory.active', 'Y')
+            ->orderBy('productsubcategory.subCategory', 'ASC')
             ->findAll();
 
         $array = ['productdetail.active' => 'Y', 'productimage.active' => 'Y'];
         $productDetailModel = new \App\Models\ProductDetailModel();
         $productImageModel = new \App\Models\ProductImageModel();
-        $products = $productDetailModel->join('productsubcategory', 'productsubcategory.id=idProductSubCategory')
-            ->join('productimage', 'productimage.idproductdetail=productdetail.id')
+        $products = $productDetailModel->join('productsubcategory', 'productsubcategory.idProductSubCategory=productdetail.idProductSubCategory')
+            ->join('productimage', 'productimage.idproductdetail=productdetail.idProductDetail')
             ->where($array)->findAll();
         $data = [
             'subCategories' => $subCategory,
@@ -90,8 +96,98 @@ class Product extends BaseController
             'products' => $products,
             'categories' => $categories,
         ];
-        // return view('welcome_message');
+        $datainput = $this->request->getPost();
+        if ($this->request->getPost()) {
+            $this->validation->run($datainput, 'instrument');
+            $errors = $this->validation->getErrors();
+            $product_images = $this->request->getFileMultiple('product_image');
+            $this->validate([
+                'product_image' => 'uploaded[product_image]|is_image[product_image]'
+            ]);
+            $other_images = $this->request->getFileMultiple('other_image');
+            $this->validate([
+                'other_image' => 'uploaded[other_image]|is_image[other_image]'
+            ]);
+
+            // var_dump($datainput);
+            // var_dump($product_images);
+            // var_dump($other_images);
+            // exit;
+
+            if (!$errors) {
+                $productEntity = new \App\Entities\ProductDetail();
+                $productImageModel = new \App\Models\ProductImageModel();
+                // print_r($datainput);
+                // exit;
+                $productEntity->fill($datainput);
+                $productEntity->created_date = date('Y-m-d H:i:s');
+                $productEntity->created_by = $this->session->get('id');
+                $productDetailModel->save($productEntity);
+                $idDetail = $productDetailModel->insertID();
+                if ($product_images) {
+                    $this->validate([
+                        'product_image' => 'uploaded[product_image]|is_image[product_image]'
+                    ]);
+                    $errors = $this->validation->getErrors();
+                    $image = new \App\Entities\productImage();
+                    foreach ($product_images as $file) {
+                        if (!$errors) {
+                            // $Upload->original = $file->getName();
+                            $name = $file->getRandomName();
+                            $file->move('/Image/Product', $name);
+                            $image->idProductDetail = $idDetail;
+                            $image->img = $name;
+                            $image->info = 'product';
+                            $image->created_date = date('Y-m-d H:i:s');
+                            $image->created_by = $this->session->get('id');
+                            $productImageModel->save($image);
+                        } else {
+                            $this->session->setFlashdata('errors', $errors);
+
+                            return view('admin/product/addProduct', $data);
+                        }
+                    }
+                }
+                if ($other_images) {
+                    $this->validate([
+                        'other_image' => 'uploaded[other_image]|is_image[other_image]'
+                    ]);
+                    $image2 = new \App\Entities\productImage();
+                    $errors = $this->validation->getErrors();
+                    if (!$errors) {
+                        foreach ($other_images as $other) {
+                            $name2 = $other->getRandomName();
+                            $other->move('/Image/Product', $name2);
+                            $image2->idProductDetail = $idDetail;
+                            $image2->img = $name2;
+                            $image2->info = 'otherInfo';
+                            $image2->created_date = date('Y-m-d H:i:s');
+                            $image2->created_by = $this->session->get('id');
+                            $productImageModel->save($image2);
+                        }
+                    } else {
+                        $this->session->setFlashdata('errors', $errors);
+                        return view('admin/product/addProduct', $data);
+                    }
+                }
+            }
+            $this->session->setFlashdata('errors', $errors);
+        }
         return view('admin/product/addProduct', $data);
+    }
+    public function addProduct()
+    {
+        $productDetailModel = new \App\Models\ProductDetailModel();
+        $data = $this->request->getPost();
+        print_r($data);
+        exit;
+        if ($this->request->getPost()) {
+            $this->validation->run($data, 'add_product');
+            $errors = $this->validation->getErrors();
+            if (!$errors) {
+                $productEntity = new \App\Entities\ProductDetail();
+            }
+        }
     }
 
     public function d5crp()

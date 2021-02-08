@@ -8,7 +8,7 @@ class ProductDetailModel extends Model
 {
 
     protected $table = 'productdetail';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'idProductDetail';
     protected $allowedFields = [
         'idProductSubCategory', 'product_brand', 'product_type', 'product_name',
         'product_description', 'product_specification', 'judul_other', 'other_information',

@@ -3,7 +3,7 @@
 <!-- DataTables -->
 <!-- <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css"> -->
-<link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+<!-- <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css"> -->
 <?= $this->endSection(); ?>
 <?= $this->section('adminContent') ?>
 <!-- page title area end -->
@@ -41,62 +41,81 @@
                             </p>
                         </div>
                     <?php endif ?>
-                    <h3 class="header-title">ADD PRODUCTS</h3>
-                    <?= form_open_multipart(base_url('product/addProduct')); ?>
-                    <!-- <form action="<?= site_url('Product/addProduct'); ?>" method="POST"> -->
+                    <h3 class="header-title">ADD PRODUCT</h3>
+                    <form action="<?= site_url('Product/Product'); ?>" enctype="multipart/form-data" method="POST">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" style="font-weight: bold;">CATEGORY</label>
+                            <div class="col-sm-4">
+                                <select name="idProductSubCategory" class="form-control" placeholder="Accesories Name">
+                                    <option value=""></option>
+                                    <?php foreach ($subCategories as $index => $subCategory) : ?>
+                                        <option value="<?= $subCategory->idProductSubCategory; ?>"><?= $subCategory->subCategory; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlTextarea2" class="col-sm-2 col-form-label" style="font-weight: bold;">INSTRUMENT NAME</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="product_name" placeholder="Product Name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlTextarea2" class="col-sm-2 col-form-label" hidden>TYPE </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="product_tpye" placeholder="Product Type" hidden>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlTextarea2" class="col-sm-2 col-form-label" style="font-weight: bold;">BRAND </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="product_brand" placeholder="Product Brand">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlTextarea2" class="col-sm-2 col-form-label" style="font-weight: bold;">IMAGES</label>
+                            <div class="col-sm-9">
+                                <input type="file" class="form-control" name="product_image[]" multiple='multiple' placeholder="Product Brand">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlTextarea2" class="col-sm-2 col-form-label" style="font-weight: bold;">DESCRIPTION</label>
+                            <div class="col-sm-9">
+                                <textarea name="product_description" class="form-control" id="description" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label" style="font-weight: bold;">SPECIFICATION</label>
+                            <div class="col-sm-9">
+                                <textarea name="product_specification" class="form-control" id="specification" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label" style="font-weight: bold;"><b>OTHER INFORMATION</b></label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label" style="font-weight: bold;">TITLE</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="exampleFormControlTextarea1" rows="3" name="judul_other"></input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label" style="font-weight: bold;">INFORMATION</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="other_information" rows="3" name="other_information"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label" style="font-weight: bold;">ADDITIONAL IMAGE</label>
+                            <div class="col-sm-9">
+                                <input type="file" class="form-control" name="other_image[]" multiple='multiple'>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
 
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Category</label>
-                        <div class="col-sm-4">
-                            <select name="idProductCategory" class="form-control" placeholder="Accesories Name">
-                                <option value="">Choose Category</option>
-                                <?php foreach ($categories as $index => $category) : ?>
-                                    <option value="<?= $category->id; ?>"><?= $category->category; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="exampleFormControlTextarea2" class="col-sm-2 col-form-label">INSTRUMENT NAME</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="product_Name" placeholder="Product Name">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="exampleFormControlTextarea2" class="col-sm-2 col-form-label">TYPE </label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="product_tpye" placeholder="Product Type">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="exampleFormControlTextarea2" class="col-sm-2 col-form-label">BRAND </label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="product_brand" placeholder="Product Brand">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="exampleFormControlTextarea2" class="col-sm-2 col-form-label">DESCRIPTION</label>
-                        <div class="col-sm-9">
-                            <textarea name="product_description" class="form-control" id="exampleFormControlTextarea1" rows="3" name="problem_body"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label">SPECIFICATION</label>
-                        <div class="col-sm-9">
-                            <textarea name="product_specification" class="form-control" id="exampleFormControlTextarea1" rows="3" name="action_body"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-goup row">
-                        <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label">PHOTOS</label>
-                        <div class="col-sm-9">
-                            <input type="file" name="product_image[]" class="form-control" multiple="true">
-                        </div>
-                    </div>
-                    <div class="mt-3">
-                        <a href="#" class="btn btn-primary">Submit</a>
-                    </div>
-                    <?= form_close(); ?>
-                    <!-- </form> -->
+                    </form>
 
                 </div>
             </div>
@@ -106,5 +125,39 @@
 <!-- data table end -->
 <?= $this->endSection(); ?>
 <?= $this->section('script'); ?>
-
+<style>
+    .ck-editor__editable_inline {
+        min-height: 200px;
+    }
+</style>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#other_information'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#description'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#specification'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
 <?= $this->endSection(); ?>

@@ -17,7 +17,8 @@
                     $errors = $session->getFlashData('errors');
                     $success = $session->getFlashData('success');
                     $id_user = $session->get('id');
-
+                    // print_r($dataproducts);
+                    // exit;
                     ?>
                     <?php if ($errors != null) : ?>
                         <div class="alert alert-danger" role="alert">
@@ -87,16 +88,21 @@
                                 <th>No</th>
                                 <th>Category</th>
                                 <th>Sub Category</th>
+                                <th>Brand</th>
+                                <th>Product Name</th>
+                                <th>Action</th>
                                 <!-- <th>Action</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($products as $index => $product) : ?>
+                            <?php foreach ($dataproducts as $index => $product) : ?>
                                 <tr>
                                     <th><?= ($index + 1) ?></th>
                                     <th><?= $product->category; ?></th>
                                     <th><?= $product->subCategory; ?></th>
-                                    <!-- <th><?= $product->subCategory; ?></th> -->
+                                    <th><?= $product->product_brand; ?></th>
+                                    <th><?= $product->product_name; ?></th>
+                                    <th><?= $product->idProductDetail; ?></th>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
