@@ -1,9 +1,7 @@
 <?= $this->extend('admin/layout/wrapper') ?>
 <?= $this->section('head'); ?>
-<!-- DataTables -->
-<!-- <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css"> -->
-<!-- <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css"> -->
+<script src="<?= base_url('/ckeditor/ckeditor.js'); ?>"></script>
+<script src="<?= base_url('/ckeditor5/build/ckeditor.js'); ?>"></script>
 <?= $this->endSection(); ?>
 <?= $this->section('adminContent') ?>
 <!-- page title area end -->
@@ -81,13 +79,13 @@
                         <div class="form-group row">
                             <label for="exampleFormControlTextarea2" class="col-sm-2 col-form-label" style="font-weight: bold;">DESCRIPTION</label>
                             <div class="col-sm-9">
-                                <textarea name="product_description" class="form-control" id="description" rows="3"></textarea>
+                                <textarea name="product_description" class="form-control" id="product_description" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label" style="font-weight: bold;">SPECIFICATION</label>
                             <div class="col-sm-9">
-                                <textarea name="product_specification" class="form-control" id="specification" rows="3"></textarea>
+                                <textarea name="product_specification" class="form-control" id="product_specification" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -131,6 +129,11 @@
     }
 </style>
 <script>
+    CKEDITOR.replace('product_description');
+    CKEDITOR.replace('product_specification');
+    CKEDITOR.replace('other_information');
+</script>
+<!-- <script>
     ClassicEditor
         .create(document.querySelector('#other_information'))
         .then(editor => {
@@ -159,5 +162,15 @@
         .catch(error => {
             console.error(error);
         });
-</script>
+</script> -->
+<!-- <script>
+    InlineEditor
+        .create(document.querySelector('#product_description'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script> -->
 <?= $this->endSection(); ?>

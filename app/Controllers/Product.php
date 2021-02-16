@@ -101,22 +101,11 @@ class Product extends BaseController
             $this->validation->run($datainput, 'instrument');
             $errors = $this->validation->getErrors();
             $product_images = $this->request->getFileMultiple('product_image');
-            $this->validate([
-                'product_image' => 'uploaded[product_image]|is_image[product_image]'
-            ]);
-            $other_images = $this->request->getFileMultiple('other_image');
-            $this->validate([
-                'other_image' => 'uploaded[other_image]|is_image[other_image]'
-            ]);
-
-            // var_dump($datainput);
-            // var_dump($product_images);
-            // var_dump($other_images);
-            // exit;
 
             if (!$errors) {
                 $productEntity = new \App\Entities\ProductDetail();
                 $productImageModel = new \App\Models\ProductImageModel();
+
                 // print_r($datainput);
                 // exit;
                 $productEntity->fill($datainput);
@@ -124,7 +113,12 @@ class Product extends BaseController
                 $productEntity->created_by = $this->session->get('id');
                 $productDetailModel->save($productEntity);
                 $idDetail = $productDetailModel->insertID();
-                if ($product_images) {
+                if ($productDetailModel) {
+                    $this->session->setFlashdata('success', 'Product already have been save');
+                }
+                $cek1 = $this->request->getFile('product_image.0');
+                if ($cek1->getName() <> '') {
+                    $product_images = $this->request->getFileMultiple('product_image');
                     $this->validate([
                         'product_image' => 'uploaded[product_image]|is_image[product_image]'
                     ]);
@@ -132,9 +126,11 @@ class Product extends BaseController
                     $image = new \App\Entities\productImage();
                     foreach ($product_images as $file) {
                         if (!$errors) {
+                            // printf('file oke');
+                            // exit;
                             // $Upload->original = $file->getName();
                             $name = $file->getRandomName();
-                            $file->move('/Image/Product', $name);
+                            $file->move('./Image/Products', $name);
                             $image->idProductDetail = $idDetail;
                             $image->img = $name;
                             $image->info = 'product';
@@ -143,12 +139,13 @@ class Product extends BaseController
                             $productImageModel->save($image);
                         } else {
                             $this->session->setFlashdata('errors', $errors);
-
                             return view('admin/product/addProduct', $data);
                         }
                     }
                 }
-                if ($other_images) {
+                $cek2 = $this->request->getFile('other_image.0');
+                if ($cek2->getName() <> '') {
+                    $other_images = $this->request->getFileMultiple('other_image');
                     $this->validate([
                         'other_image' => 'uploaded[other_image]|is_image[other_image]'
                     ]);
@@ -157,7 +154,7 @@ class Product extends BaseController
                     if (!$errors) {
                         foreach ($other_images as $other) {
                             $name2 = $other->getRandomName();
-                            $other->move('/Image/Product', $name2);
+                            $other->move('./Image/Products', $name2);
                             $image2->idProductDetail = $idDetail;
                             $image2->img = $name2;
                             $image2->info = 'otherInfo';
@@ -170,26 +167,162 @@ class Product extends BaseController
                         return view('admin/product/addProduct', $data);
                     }
                 }
+                return redirect()->to(site_url('Product/view'));
             }
             $this->session->setFlashdata('errors', $errors);
         }
         return view('admin/product/addProduct', $data);
     }
-    public function addProduct()
+    public function editProduct()
     {
+        $idProduct = $this->request->uri->getSegment(3);
         $productDetailModel = new \App\Models\ProductDetailModel();
-        $data = $this->request->getPost();
-        print_r($data);
-        exit;
+        $productEntiti = new \App\Entities\ProductDetail();
+        // print_r($idProduct);
+        // exit;
+
         if ($this->request->getPost()) {
-            $this->validation->run($data, 'add_product');
+            $datainput = $this->request->getPost();
+            $this->validation->run($datainput, 'instrument');
             $errors = $this->validation->getErrors();
+            $product_images = $this->request->getFileMultiple('product_image');
             if (!$errors) {
                 $productEntity = new \App\Entities\ProductDetail();
+                $productImageModel = new \App\Models\ProductImageModel();
+                $productEntity->idProductDetail = $idProduct;
+                $productEntity->fill($datainput);
+                $productEntity->updated_date = date('Y-m-d H:i:s');
+                $productEntity->updated_by = $this->session->get('id');
+                $productDetailModel->save($productEntity);
+                // $idDetail = $productDetailModel->insertID();
+                if ($productDetailModel) {
+                    $this->session->setFlashdata('success', 'Product already have been save');
+                }
+                $cek1 = $this->request->getFile('product_image.0');
+                if ($cek1->getName() <> '') {
+                    $product_images = $this->request->getFileMultiple('product_image');
+                    $this->validate([
+                        'product_image' => 'uploaded[product_image]|is_image[product_image]'
+                    ]);
+                    $errors = $this->validation->getErrors();
+                    $image = new \App\Entities\productImage();
+                    foreach ($product_images as $file) {
+                        if (!$errors) {
+                            // printf('file oke');
+                            // exit;
+                            // $Upload->original = $file->getName();
+                            $name = $file->getRandomName();
+                            $file->move('./Image/Products', $name);
+                            $image->idProductDetail = $idProduct;
+                            $image->img = $name;
+                            $image->info = 'product';
+                            $image->created_date = date('Y-m-d H:i:s');
+                            $image->created_by = $this->session->get('id');
+                            $productImageModel->save($image);
+                        } else {
+                            $this->session->setFlashdata('errors', $errors);
+                            return redirect()->to(site_url('Product/view'));
+                        }
+                    }
+                }
+                $cek2 = $this->request->getFile('other_image.0');
+                if ($cek2->getName() <> '') {
+                    $other_images = $this->request->getFileMultiple('other_image');
+                    $this->validate([
+                        'other_image' => 'uploaded[other_image]|is_image[other_image]'
+                    ]);
+                    $image2 = new \App\Entities\productImage();
+                    $errors = $this->validation->getErrors();
+                    if (!$errors) {
+                        foreach ($other_images as $other) {
+                            $name2 = $other->getRandomName();
+                            $other->move('./Image/Products', $name2);
+                            $image2->idProductDetail = $idProduct;
+                            $image2->img = $name2;
+                            $image2->info = 'otherInfo';
+                            $image2->created_date = date('Y-m-d H:i:s');
+                            $image2->created_by = $this->session->get('id');
+                            $productImageModel->save($image2);
+                        }
+                    } else {
+                        $this->session->setFlashdata('errors', $errors);
+                        return redirect()->to(site_url('Product/view'));
+                    }
+                }
+                return redirect()->to(site_url('Product/view'));
             }
+            $this->session->setFlashdata('errors', $errors);
         }
+        $detail = $productDetailModel->where(['idProductDetail' => $idProduct])->first();
+        $idcat = $detail->idProductSubCategory;
+        $productSubCategoryModel = new \App\Models\SubCategoryProductModel();
+        $subCategories = $productSubCategoryModel->where('active=', 'Y')->findAll();
+        $subCat = $productSubCategoryModel->where(['idProductSubCategory' => $idcat])->first();
+        $categoryProductModel =  new \App\Models\CategoryProductModel();
+        $categories =  $categoryProductModel->where('active', 'Y')->findAll();
+        $SubCategoryProductModel = new \App\Models\SubCategoryProductModel();
+        $subCategory = $SubCategoryProductModel->join('productcategory', 'productcategory.idProductCategory=productsubcategory.idProductCategory')->where('productsubcategory.active', 'Y')
+            ->orderBy('productsubcategory.subCategory', 'ASC')
+            ->findAll();
+        $ProductImageModel = new \App\Models\ProductImageModel();
+        $productImages = $ProductImageModel->where(['idProductDetail' => $idProduct, 'info' => 'product', 'active' => 'Y'])->findAll();
+        $otherImages = $ProductImageModel->where(['idProductDetail' => $idProduct, 'info' => 'otherInfo', 'active' => 'Y'])->findAll();
+        // print_r($images);
+        // print_r($subCategory);
+        // print_r($subCat);
+        // exit;
+        $data = [
+            'detail' => $detail,
+            'subCat' => $subCat,
+            'subCategories' => $subCategory,
+            'productImages' => $productImages,
+            'otherImages' => $otherImages,
+
+        ];
+        return view('admin/product/editProduct', $data);
     }
 
+    public function detail()
+    {
+        $idDetail = $this->request->uri->getSegment(3);
+        // print_r($idDetail);
+        $productDetailModel = new \App\Models\ProductDetailModel();
+        $entiti = new \App\Entities\ProductDetail();
+        $SubProductModel = new \App\Models\SubCategoryProductModel();
+        $entiti2 = new \App\Entities\SubCategoryProduct();
+        $detail = $productDetailModel->join('productsubcategory', 'productsubcategory.idProductSubCategory=productdetail.idProductSubCategory')
+            ->where('productdetail.idProductDetail=', $idDetail)->first();
+
+        $ProductImageModel = new \App\Models\ProductImageModel();
+        $productImages = $ProductImageModel->where(['idProductDetail' => $idDetail, 'info' => 'product', 'active' => 'Y'])->findAll();
+        $otherImages = $ProductImageModel->where(['idProductDetail' => $idDetail, 'info' => 'otherInfo', 'active' => 'Y'])->first();
+        $data = [
+            'detail' => $detail,
+            'images' => $productImages,
+            'otherImages' => $otherImages,
+        ];
+        // print_r($otherImages);
+        // exit;
+        return view('product/view', $data);
+    }
+    public function delProductImage()
+    {
+        $idImage = $this->request->uri->getSegment(3);
+        $ProductImageModel = new \App\Models\ProductImageModel();
+        $DetailProduct = $ProductImageModel->where('idProductImage=', $idImage)->first();
+        $idProduct = $DetailProduct->idProductDetail;
+        // $ProductImageEntity = new \App\Entities\productImage();
+        // $image=$ProductImageModel->where('idProductImage=',$idImage)->first();
+        $ProductImageModel->set(['active' => 'N'])->where('idProductImage=', $idImage)->update();
+        return redirect()->to(site_url('product/editProduct/' . $idProduct));
+    }
+    public function delProduct()
+    {
+        $idProduct = $this->request->uri->getSegment(3);
+        $productDetailModel = new \App\Models\ProductDetailModel();
+        $productDetailModel->set(['active' => 'N'])->where('idProductDetail=', $idProduct)->update();
+        return redirect()->to(site_url('Product/view'));
+    }
     public function d5crp()
     {
         return view('product/D5CRP');

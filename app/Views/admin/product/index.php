@@ -67,8 +67,18 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <label class="col-3 col-form-label">Is Header?</label>
+                                            <div class="col-sm-7">
+                                                <select name="header" class="form-control ml-1">
+                                                    <option value="Y">Yes</option>
+                                                    <option value="N">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
                                             <label class="col-3 col-form-label">Sub Category</label>
-                                            <input type="text" class="col-sm-7 ml-2 form-control" name="subCategory">
+                                            <input type="text" class="col-sm-7 ml-3 form-control" name="subCategory">
                                         </div>
                                     </div>
                                     <div class="modal-footer">

@@ -25,7 +25,7 @@ class HomeAdmin extends BaseController
         $categoryProductModel =  new \App\Models\CategoryProductModel();
         $categories =  $categoryProductModel->where('active', 'Y')->findAll();
         $SubCategoryProductModel = new \App\Models\SubCategoryProductModel();
-        $products = $SubCategoryProductModel->join('productcategory', 'productcategory.id=idProductCategory')->where('productsubcategory.active', 'Y')
+        $products = $SubCategoryProductModel->join('productcategory', 'productcategory.idProductCategory=productsubcategory.idProductCategory')->where('productsubcategory.active', 'Y')
             ->orderBy('productcategory.category', 'ASC')
             ->findAll();
 

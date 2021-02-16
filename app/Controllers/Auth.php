@@ -9,6 +9,7 @@ class Auth extends BaseController
         helper('form');
         $this->validation = \Config\Services::validation();
         $this->session = session();
+        // $this->load->view('home/index');
     }
 
     public function register()

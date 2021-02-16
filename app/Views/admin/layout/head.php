@@ -22,6 +22,6 @@
     <link rel="stylesheet" href="<?= base_url(); ?>/BackEnd/srtdash/assets/css/responsive.css">
     <!-- modernizr css -->
     <?= $this->renderSection('head') ?>
-
+    <!-- <script src="<<?= base_url(); ?>/ckeditor5/build/ckeditor.js"></script> -->
     <script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>

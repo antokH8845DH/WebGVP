@@ -1,5 +1,9 @@
 <header class="header">
-
+    <?php
+    $categoryProductModel =  new \App\Models\CategoryProductModel();
+    $catentity = new \App\Entities\CategoryProduct();
+    $categories =  $categoryProductModel->where('active', 'Y')->findAll();
+    ?>
     <!-- Top Bar -->
     <div class="top_bar">
         <div class="top_bar_container">
@@ -42,7 +46,6 @@
                                 <div class="logo_text"><img src="<?= base_url(); ?>/image/gvp.png" width="220px" alt=""> </span></div>
                             </a>
                         </div>
-
                         <nav class="nav-menu d-none d-lg-block">
                             <ul>
                                 <li class="active"><a href="<?= site_url('Home'); ?>">Home</a></li>
@@ -104,7 +107,38 @@
                                         </li>
                                     </ul>
                                 </li>
-
+                                <li class="drop-down"><a href="#">Product</a>
+                                    <ul>
+                                        <?php foreach ($categories as $product) : ?>
+                                            <li class="drop-down"><a href="#"><?= $product->category; ?></a>
+                                                <ul>
+                                                    <?php
+                                                    $SubCategoryProductModel = new \App\Models\SubCategoryProductModel();
+                                                    $subCategory = $SubCategoryProductModel->where(['idProductCategory' => $product->idProductCategory, 'active' => 'Y'])->findAll();
+                                                    foreach ($subCategory as $sub) :
+                                                        $drop = $sub->header;
+                                                        if ($drop == 'Y') :     ?>
+                                                            <li class="drop-down"><a href="#"><?= $sub->subCategory; ?></a>
+                                                            <?php else : ?>
+                                                            <li class=""><a href="#"><?= $sub->subCategory; ?></a>
+                                                            <?php endif ?>
+                                                            <ul>
+                                                                <?php
+                                                                $productDetailModel = new \App\Models\ProductDetailModel();
+                                                                $details = $productDetailModel->where(['idProductSubCategory' => $sub->idProductSubCategory])->findAll();
+                                                                foreach ($details as $detail) :
+                                                                ?>
+                                                                    <li><a href="<?= site_url('/Product/Detail/' . $detail->idProductDetail); ?>"><?= $detail->product_name; ?></a></li>
+                                                                <?php endforeach ?>
+                                                            </ul>
+                                                            </li>
+                                                        <?php endforeach ?>
+                                                </ul>
+                                            </li>
+                                            <div class="dropdown-divider"></div>
+                                        <?php endforeach ?>
+                                    </ul>
+                                </li>
                                 <li><a href="#">Services</a></li>
                                 <li><a href="<?= site_url('News'); ?>">News</a></li>
                                 <li><a href="<?= site_url('Career'); ?>">Career</a></li>

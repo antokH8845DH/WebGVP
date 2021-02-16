@@ -1,7 +1,3 @@
-<?php
-
-use App\Controllers\Product;
-?>
 <?= $this->extend('layout/wrapper') ?>
 <?= $this->section('head') ?>
 <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/FrontEnd/styles/about.css">
