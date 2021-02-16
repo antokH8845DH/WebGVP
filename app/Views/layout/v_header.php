@@ -50,63 +50,7 @@
                             <ul>
                                 <li class="active"><a href="<?= site_url('Home'); ?>">Home</a></li>
                                 <li><a href="<?= site_url('/aboutUs'); ?>">About</a></li>
-                                <li class="drop-down"><a href="#">Product</a>
-                                    <ul>
-                                        <!-- <li><a href="#">Drop Down 1</a></li> -->
-                                        <li class="drop-down"><a href="#">Analyzers</a>
-                                            <ul>
-                                                <li class="drop-down"><a href="#">Hematology</a>
-                                                    <ul>
-                                                        <li><a href="<?= site_url('/product/DH36'); ?>">Dymind DH36</a></li>
-                                                        <li><a href="<?= site_url('/product/D5CRP'); ?>">Dymind D5CRP</a></li>
-                                                    </ul>
-                                                <li class="drop-down"><a href="#">Immunology</a>
-                                                    <ul>
-                                                        <li><a href="<?= site_url('/product/A1000'); ?>">Autolumo A1000</a></li>
-                                                        <li><a href="<?= site_url('/product/A2000plus'); ?>">Autolumo A2000plus</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="drop-down"><a href="#">Chlinical Chemistry</a>
-                                                    <ul>
-                                                        <!-- <li><a href="#">GS200</a></li>
-                                                        <li><a href="#">GS400</a></li> -->
-                                                        <li><a href="<?= site_url('/product/MS480'); ?>">MS480</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="<?= site_url('/product/H900'); ?>">Electrolyte</a></li>
-                                                <li><a href="#">Protein</a></li>
-                                                <li><a href="#">Coagulation</a></li>
-                                                <li><a href="#">ESR</a></li>
-                                                <li><a href="#">Urine</a></li>
-                                            </ul>
-                                        </li>
-                                        <div class="dropdown-divider"></div>
-                                        <li class="drop-down"><a href="#">Pre-Analytic Module</a>
-                                            <ul>
-                                                <li class="drop-down"><a href="#">Automatic Tube Labeler</a>
-                                                    <!-- <ul>
-                                                        <li><a href="#">Select</a></li>
-                                                        <li><a href="#">Select-u</a></li>
-                                                    </ul> -->
-                                                </li>
-                                                <li><a href="#">Pre-filled Speciment Container</a></li>
-                                            </ul>
-                                        </li>
-                                        <div class="dropdown-divider"></div>
-                                        <li class="drop-down"><a href="#">Healthcare System</a>
-                                            <ul>
-                                                <li><a href="#">Laboratory Information System</a></li>
-                                            </ul>
-                                        </li>
-                                        <div class="dropdown-divider"></div>
-                                        <li class="drop-down"><a href="#">Medical Refrigerator</a>
-                                            <ul>
-                                                <li><a href="#">Refrigerators</a></li>
-                                                <li><a href="#">Freezers</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
+
                                 <li class="drop-down"><a href="#">Product</a>
                                     <ul>
                                         <?php foreach ($categories as $product) : ?>
@@ -125,7 +69,7 @@
                                                             <ul>
                                                                 <?php
                                                                 $productDetailModel = new \App\Models\ProductDetailModel();
-                                                                $details = $productDetailModel->where(['idProductSubCategory' => $sub->idProductSubCategory])->findAll();
+                                                                $details = $productDetailModel->where(['idProductSubCategory' => $sub->idProductSubCategory, 'active' => 'Y'])->findAll();
                                                                 foreach ($details as $detail) :
                                                                 ?>
                                                                     <li><a href="<?= site_url('/Product/Detail/' . $detail->idProductDetail); ?>"><?= $detail->product_name; ?></a></li>
