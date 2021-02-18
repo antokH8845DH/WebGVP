@@ -131,4 +131,37 @@ class Validation
 			'required' => 'Spesifikasi harus diisi',
 		],
 	];
+
+	public $email = [
+		'name' => [
+			'rules' => 'required',
+		],
+		'email' => [
+			'rules' => 'required|valid_email',
+		],
+		'subject' => [
+			'rules' => 'required|min_length[3]',
+		],
+		'message' => [
+			'rules' => 'required|min_length[3]',
+		],
+	];
+	public $email_errors = [
+		'name' => [
+			'required' => 'Your Name is Required',
+		],
+		'email' => [
+			'required' => 'Email is Required',
+			'valid_email' => 'Email is not valid',
+		],
+		// 'product_tpye' => [
+		// 	'required' => 'Tipe Produk harus diisi',
+		// ],
+		'subject' => [
+			'required' => 'Subject is Required',
+		],
+		'message' => [
+			'required' => 'Message is Required',
+		],
+	];
 }

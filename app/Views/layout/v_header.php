@@ -21,7 +21,7 @@
                                 </li>
                                 <li>
                                     <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                    <div>cs.marketing@gvp.co.id</div>
+                                    <div>customer.service@gvp.co.id</div>
                                 </li>
                             </ul>
                             <div class="top_bar_login ml-auto">

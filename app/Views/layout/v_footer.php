@@ -42,7 +42,7 @@
 										<ul>
 											<!-- <li>Head Office</li> -->
 											<li>Sukarno-Hatta 8A, Semarang, Jawa Tengah, Indonesia</li>
-											<li>Email: cs.marketing@gvp.co.id</li>
+											<li>Email: customer.service@gvp.co.id</li>
 											<li>Phone: (+62 24) 76729175</li>
 										</ul>
 									</div>

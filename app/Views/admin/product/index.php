@@ -61,7 +61,7 @@
                                                 <select name="idProductCategory" class="form-control ml-1" placeholder="Accesories Name">
                                                     <option value="">Choose Category</option>
                                                     <?php foreach ($categories as $index => $category) : ?>
-                                                        <option value="<?= $category->id; ?>"><?= $category->category; ?></option>
+                                                        <option value="<?= $category->idProductCategory; ?>"><?= $category->category; ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>

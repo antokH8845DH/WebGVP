@@ -69,7 +69,7 @@
                         <div class="info-box mt-4">
                             <i class="bx bx-envelope"></i>
                             <h3>Email Us</h3>
-                            <p>cs.marketing@gvp.co.id</p>
+                            <p>customer.service@gvp.co.id</p>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -84,19 +84,19 @@
             </div>
 
             <div class="col-lg-6 mt-4 mt-md-0 mb-4">
-                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                <form action="<?= base_url('Home/sendEmail'); ?>" method="post" class="php-email-form">
                     <div class="form-row">
                         <div class="col-md-6 form-group">
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                            <input type="text" name="name" class="form-control" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                             <div class="validate"></div>
                         </div>
                         <div class="col-md-6 form-group">
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                            <input type="email" class="form-control" name="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
                             <div class="validate"></div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                        <input type="text" class="form-control" name="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
                         <div class="validate"></div>
                     </div>
                     <div class="form-group">
