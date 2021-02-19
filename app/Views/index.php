@@ -12,9 +12,13 @@
 
                 <div class="col-lg-12">
                     <div class="owl-carousel portfolio-details-carousel">
-                        <img src="<?= base_url(); ?>/image/home/slider2.jpg" class="img-fluid" alt="">
+                        <?php foreach ($headers as $header) : ?>
+
+                            <!-- <img src="<?= base_url(); ?>/image/home/slider2.jpg" class="img-fluid" alt="">
                         <img src="<?= base_url(); ?>/image/home/slider1.png" class="img-fluid" alt="">
-                        <img src="<?= base_url(); ?>/image/home/slider3.png" class="img-fluid" alt="">
+                        <img src="<?= base_url(); ?>/image/home/slider3.png" class="img-fluid" alt=""> -->
+                            <img src="<?= base_url('/Image/Headers/' . $header->image); ?>" class="img-fluid" alt="">
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>

@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="<?= base_url(); ?>/BackEnd/srtdash/assets/css/metisMenu.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/BackEnd/srtdash/assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/BackEnd/srtdash/assets/css/slicknav.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>/BackEnd/srtdash/assets/css/adminlte.min.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="<?= base_url(); ?>/BackEnd/srtdash/assets/css/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url(); ?>/BackEnd/srtdash/assets/css/dataTables/dataTables.responsive.css" rel="stylesheet">
+
     <!-- amchart css -->
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
     <!-- others css -->

@@ -138,6 +138,8 @@
         .bindPopup('Representative Jakarta')
     L.marker([-7.31641, 112.71820]).addTo(map)
         .bindPopup('Representative Surabaya')
+    L.marker([-6.906668581596631, 107.64540635853554]).addTo(map)
+        .bindPopup('Representative Bandung')
     // .openPopup();
 </script>
 <?= $this->endSection() ?>

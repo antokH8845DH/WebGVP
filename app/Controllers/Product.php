@@ -22,8 +22,8 @@ class Product extends BaseController
 
         if ($this->request->getPost()) {
             $data = $this->request->getPost();
-            print_r($data);
-            exit;
+            // print_r($data);
+            // exit;
             $validate = $this->validation->run($data, 'add_product');
             $errors = $this->validation->getErrors();
             if (!$errors) {

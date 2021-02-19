@@ -72,7 +72,7 @@
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-palette"></i><span>Tampilan</span></a>
                                 <ul class="collapse">
-                                    <li><a href="accordion.html">Header</a></li>
+                                    <li><a href="<?= base_url('Tampilan/header'); ?>">Header</a></li>
                                     <li><a href="alert.html">Features</a></li>
                                     <li><a href="badge.html">News</a></li>
                                     <li><a href="button.html">Career</a></li>

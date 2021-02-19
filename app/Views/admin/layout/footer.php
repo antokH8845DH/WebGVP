@@ -14,8 +14,14 @@
 <script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/bootstrap.min.js"></script>
 <script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/owl.carousel.min.js"></script>
 <script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/metisMenu.min.js"></script>
+<!-- <script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/metismenujs.min.js"></script> -->
 <script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/jquery.slimscroll.min.js"></script>
 <script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/jquery.slicknav.min.js"></script>
+<script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/adminlte.min.js"></script>
+<script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables JavaScript -->
+<script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/dataTables/jquery.dataTables.min.js"></script>
+<script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/dataTables/dataTables.bootstrap.min.js"></script>
 
 <!-- start chart js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>

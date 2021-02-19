@@ -16,6 +16,7 @@ class Home extends BaseController
 		$categoryProductModel =  new \App\Models\CategoryProductModel();
 		$catentity = new \App\Entities\CategoryProduct();
 		$subCategoryProductModel = new \App\Models\SubCategoryProductModel();
+		$HeaderImageModel = new \App\Models\HeaderImageModel();
 		$categories =  $categoryProductModel->where('active', 'Y')->findAll();
 		$subCategory = $subCategoryProductModel->join('productcategory', 'productcategory.idProductCategory=productsubcategory.idProductCategory')->where('productsubcategory.active', 'Y')
 			->orderBy('productcategory.category', 'ASC')
@@ -33,12 +34,14 @@ class Home extends BaseController
 			->join('productcategory', 'productcategory.idProductCategory=productsubcategory.idProductCategory')
 			->where('productdetail.active', 'Y')->findAll();
 		// return view('welcome_message');
+		$headers = $HeaderImageModel->where('active=', 'Y')->findAll();
 		$data = [
 			'subCategories' => $subCategory,
 			'title' => 'Product',
 			'products' => $products,
 			'categories' => $categories,
 			'dataproducts' => $dataproducts,
+			'headers' => $headers,
 
 
 		];
