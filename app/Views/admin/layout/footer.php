@@ -8,7 +8,8 @@
 <!-- footer area end-->
 </div>
 <!-- jquery latest version -->
-<script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/vendor/jquery-2.2.4.min.js"></script>
+<!-- <script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/vendor/jquery-2.2.4.min.js"></script> -->
+<script src="<?= base_url(); ?>/FrontEnd/js/jquery-3.2.1.min.js"></script>
 <!-- bootstrap 4 js -->
 <script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/popper.min.js"></script>
 <script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/bootstrap.min.js"></script>
@@ -40,6 +41,10 @@
 <!-- others plugins -->
 <script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/plugins.js"></script>
 <script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/scripts.js"></script>
+<script src="<?= base_url(); ?>/BackEnd/srtdash/assets/js/scripts.js"></script>
+<script src="<?= base_url(); ?>/asset/sweetalert2/sweetalert2.all.min.js"></script>
+<script src="<?= base_url(); ?>/asset/myscript/myscript.js"></script>
+
 <?= $this->renderSection('script'); ?>
 </body>
 

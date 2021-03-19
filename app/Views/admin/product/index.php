@@ -15,32 +15,21 @@
                     <?php
                     $session = session();
                     $errors = $session->getFlashData('errors');
-                    $success = $session->getFlashData('success');
+                    // $success = $session->getFlashData('flash');
+                    // $success = $session->getFlashData('success');
                     $id_user = $session->get('id');
 
+                    $eror = '';
+                    if ($errors != null) {
+                        foreach ($errors as $err) {
+                            $eror .=   $err . ' | ';
+                            // foreach ($ARRAY as $item) { $STRING .= $item; }
+                        }
+                    }
                     ?>
-                    <?php if ($errors != null) : ?>
-                        <div class="alert alert-danger" role="alert">
-                            <h4 class="alert-heading">Terjadi Kesalahan</h4>
-                            <hr>
-                            <p class="mb-0">
-                                <?php
-                                foreach ($errors as $err) {
-                                    echo $err . '<br>';
-                                }
-                                ?>
-                            </p>
-                        </div>
-                    <?php endif; ?>
-                    <?php if ($success != null) : ?>
-                        <div class="alert alert-success mt-2" role="success">
-                            <h4 class="alert-heading">SUKSES</h4>
-                            <hr>
-                            <p class="mb-0">
-                                Data Telah Tersimpan
-                            </p>
-                        </div>
-                    <?php endif ?>
+                    <div class="flash-data" data-flashdata="<?= $session->getFlashData('flash'); ?>"></div>
+                    <div class="flash-error" data-flasherror="<?= $eror; ?>"></div>
+
                     <h3 class="header-title">Data Sub Category Products</h3>
                     <a href="" class="btn btn-outline-primary btn-sm mb-3" href="#" role="button" data-toggle="modal" data-target="#modalProduct"><i class="fa fa-plus-circle"></i> Add Menu Product</a>
                     <!-- <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modalPassword">Ganti Password</a> -->

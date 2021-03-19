@@ -67,13 +67,28 @@
                 <p style="color:dimgray"><?= $detail->other_information; ?> </p>
             </div>
             <div class="row">
-                <div class="col-12" data-aos="fade-up" data-aos-delay="100">
-                    <?php
-                    // $Cek = $otherImages->img;
-                    if ($otherImages <> '') : ?>
-                        <img src="<?= base_url('/Image/Products/' . $otherImages->img); ?>" class="img-fluid" alt="">
-                    <?php endif ?>
-                </div>
+                <?php
+                // $Cek = $otherImages->img;
+                // if ($otherImages <> '') : 
+                foreach ($otherImages as $index => $otherImage) :
+                ?>
+                    <?php if ($index == 0) : ?>
+                        <div class="col-12" data-aos="fade-up" data-aos-delay="100">
+
+                            <img src="<?= base_url('/Image/Products/' . $otherImage->img); ?>" class="img-fluid" alt="">
+                        </div>
+                    <?php else : ?>
+                        <div class="col-4 mt-4 mr-4" data-aos="fade-up" data-aos-delay="100">
+
+                            <img style="width:300px" src="<?= base_url('/Image/Products/' . $otherImage->img); ?>" class="img-fluid" alt="">
+                        </div>
+
+                <?php
+                        $index++;
+                    endif;
+                endforeach;
+                //  endif
+                ?>
             </div>
         </div>
 

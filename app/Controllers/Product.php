@@ -37,7 +37,8 @@ class Product extends BaseController
                 // exit;
                 $save = $subCategoryProductModel->save($category);
                 if ($save) {
-                    $this->session->setFlashdata('success', "Data Telah di Simpan");
+                    // $this->session->setFlashdata('success', "Data Telah di Simpan");
+                    $this->session->setFlashdata('flash', "Data Telah di Simpan");
                 }
                 return redirect()->to(site_url('HomeAdmin/view'));
             }
@@ -114,7 +115,7 @@ class Product extends BaseController
                 $productDetailModel->save($productEntity);
                 $idDetail = $productDetailModel->insertID();
                 if ($productDetailModel) {
-                    $this->session->setFlashdata('success', 'Product already have been save');
+                    $this->session->setFlashdata('flash', "Data Telah di Simpan");
                 }
                 $cek1 = $this->request->getFile('product_image.0');
                 if ($cek1->getName() <> '') {
@@ -167,6 +168,7 @@ class Product extends BaseController
                         return view('admin/product/addProduct', $data);
                     }
                 }
+                // $this->session->setFlashdata('flash', "Data has been saved");
                 return redirect()->to(site_url('Product/view'));
             }
             $this->session->setFlashdata('errors', $errors);
@@ -194,9 +196,9 @@ class Product extends BaseController
                 $productEntity->updated_date = date('Y-m-d H:i:s');
                 $productEntity->updated_by = $this->session->get('id');
                 $productDetailModel->save($productEntity);
-                // $idDetail = $productDetailModel->insertID();
+                $idDetail = $productDetailModel->insertID();
                 if ($productDetailModel) {
-                    $this->session->setFlashdata('success', 'Product already have been save');
+                    $this->session->setFlashdata('flash', "Data Telah di Edit");
                 }
                 $cek1 = $this->request->getFile('product_image.0');
                 if ($cek1->getName() <> '') {
@@ -249,6 +251,7 @@ class Product extends BaseController
                         return redirect()->to(site_url('Product/view'));
                     }
                 }
+                // $this->session->setFlashdata('flash', "Data Has been Edited");
                 return redirect()->to(site_url('Product/view'));
             }
             $this->session->setFlashdata('errors', $errors);
@@ -295,7 +298,7 @@ class Product extends BaseController
 
         $ProductImageModel = new \App\Models\ProductImageModel();
         $productImages = $ProductImageModel->where(['idProductDetail' => $idDetail, 'info' => 'product', 'active' => 'Y'])->findAll();
-        $otherImages = $ProductImageModel->where(['idProductDetail' => $idDetail, 'info' => 'otherInfo', 'active' => 'Y'])->first();
+        $otherImages = $ProductImageModel->where(['idProductDetail' => $idDetail, 'info' => 'otherInfo', 'active' => 'Y'])->findAll();
         $data = [
             'detail' => $detail,
             'images' => $productImages,

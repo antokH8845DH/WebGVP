@@ -95,6 +95,16 @@
                             <div class="validate"></div>
                         </div>
                     </div>
+                    <div class="form-row">
+                        <div class="col-md-6 form-group">
+                            <input type="text" name="institution" class="form-control" placeholder="Institution" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                            <div class="validate"></div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <input type="text" class="form-control" name="phone" placeholder="Your phone number" data-rule="phone" data-msg="Please enter a valid phone" />
+                            <div class="validate"></div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <input type="text" class="form-control" name="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
                         <div class="validate"></div>
@@ -130,16 +140,43 @@
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
+    map.locate({
+        setView: true,
+        maxZoom: 7
+    });
 
-    L.marker([-6.9859790145978184, 110.45528931245771]).addTo(map)
-        .bindPopup('GVP Head Office')
-        .openPopup();
-    L.marker([-6.19941, 106.89318]).addTo(map)
-        .bindPopup('Representative Jakarta')
-    L.marker([-7.31641, 112.71820]).addTo(map)
-        .bindPopup('Representative Surabaya')
-    L.marker([-6.906668581596631, 107.64540635853554]).addTo(map)
-        .bindPopup('Representative Bandung')
+    function onLocationFound(e) {
+        var radius = e.accuracy;
+        var gvpIcon = L.icon({
+            iconUrl: '/Image/gvpicon.png',
+            // shadowUrl: 'leaf-shadow.png',
+
+            // iconSize: [38, 95], // size of the icon
+            shadowSize: [50, 64], // size of the shadow
+            iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+            // shadowAnchor: [4, 62], // the same for the shadow
+            popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+        const lokasi = e.latlng;
+        console.log(e.latlng);
+        L.marker([-6.9859790145978184, 110.45528931245771]).addTo(map)
+            .bindPopup('GVP Head Office')
+            .openPopup();
+        L.marker([-6.19941, 106.89318]).addTo(map)
+            .bindPopup('Representative Jakarta')
+        L.marker([-7.31641, 112.71820]).addTo(map)
+            .bindPopup('Representative Surabaya')
+        L.marker([-6.906668581596631, 107.64540635853554]).addTo(map)
+            .bindPopup('Representative Bandung')
+
+
+        L.marker(lokasi).addTo(map)
+            .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+        L.circle(e.latlng, radius).addTo(map);
+
+    }
+    map.on('locationfound', onLocationFound);
     // .openPopup();
 </script>
 <?= $this->endSection() ?>
